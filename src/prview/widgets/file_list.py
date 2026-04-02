@@ -6,6 +6,7 @@ Displays changed files with status indicators, line counts, and review state.
 from __future__ import annotations
 
 from textual.binding import Binding
+from textual.css.query import NoMatches
 from textual.message import Message
 from textual.widgets import ListView, ListItem, Label
 from textual.app import ComposeResult
@@ -98,5 +99,5 @@ class FileList(ListView):
         """Move focus to the diff pane on Enter."""
         try:
             self.app.query_one("#diff-view", DiffView).focus()
-        except Exception:
+        except NoMatches:
             pass
