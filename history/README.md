@@ -4,7 +4,7 @@ Lightweight record of what was planned, implemented, and why.
 
 ## Convention
 
-Each entry is a single Markdown file named `YYYY-MM-DD-<slug>.md` (e.g. `2026-04-02-initial-setup.md`).
+Each entry is a Markdown file in `specs/`, numbered for sorting: `NNN-<slug>.md` (e.g. `001-initial-setup.md`).
 
 ### Entry template
 
