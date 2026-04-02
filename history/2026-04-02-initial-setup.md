@@ -27,4 +27,4 @@ The project was bootstrapped as a Python 3.11+ package using Textual for the TUI
 
 ## Notes
 - The Chronicler role (this log) was introduced as part of the agent roles definition.
-- NOTES.md serves as a scratchpad for quick thoughts; CHANGELOG.md is the one-line-per-change log updated on PR merges.
+- NOTES.md serves as a scratchpad for quick thoughts; history/CHANGELOG.md is the one-line-per-change log updated on PR merges.
