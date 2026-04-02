@@ -6,12 +6,14 @@ Displays changed files with status indicators, line counts, and review state.
 from __future__ import annotations
 
 from textual.binding import Binding
+from textual.css.query import NoMatches
 from textual.message import Message
 from textual.widgets import ListView, ListItem, Label
 from textual.app import ComposeResult
 
 from prview.models import DiffData, DiffFile
 from prview.state import ReviewState
+from prview.widgets.diff_view import DiffView
 
 
 STATUS_MAP: dict[str, tuple[str, str]] = {
@@ -87,8 +89,15 @@ class FileList(ListView):
         if path in self._file_items:
             self._file_items[path].set_reviewed(reviewed)
 
-    def on_list_view_selected(self, event: ListView.Selected) -> None:
-        """Handle item selection and post FileSelected message."""
+    def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
+        """Post FileSelected on cursor movement so the diff updates immediately."""
         item = event.item
         if isinstance(item, FileListItem):
             self.post_message(self.FileSelected(item.diff_file))
+
+    def on_list_view_selected(self, event: ListView.Selected) -> None:
+        """Move focus to the diff pane on Enter."""
+        try:
+            self.app.query_one("#diff-view", DiffView).focus()
+        except NoMatches:
+            pass

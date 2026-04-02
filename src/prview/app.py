@@ -100,10 +100,5 @@ class DiffnavApp(App):
             return
         new_idx = idx + direction
         if 0 <= new_idx < len(files):
-            new_file = files[new_idx]
-            self._current_file = new_file
-            diff_view = self.query_one("#diff-view", DiffView)
-            diff_view.show_file(new_file)
-            # Also update file list selection
             file_list = self.query_one("#file-list", FileList)
             file_list.index = new_idx
