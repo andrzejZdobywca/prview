@@ -31,6 +31,10 @@ git diff | prview             # piped input
 | `?` | Show help overlay |
 | `q` | Quit |
 
+## Architecture
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for how the code is structured.
+
 ## Development
 
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
