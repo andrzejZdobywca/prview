@@ -1,0 +1,10 @@
+#file-list {
+    width: 1fr;
+    min-width: 30;
+    max-width: 50;
+    border-right: solid $accent;
+}
+
+#diff-view {
+    width: 3fr;
+}

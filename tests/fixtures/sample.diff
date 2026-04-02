@@ -1,0 +1,61 @@
+diff --git a/utils/helpers.py b/utils/helpers.py
+new file mode 100644
+index 0000000..a1b2c3d
+--- /dev/null
++++ b/utils/helpers.py
+@@ -0,0 +1,4 @@
++"""Helper utilities for the project."""
++
++def clamp(value: int, lo: int, hi: int) -> int:
++    return max(lo, min(hi, value))
+diff --git a/src/app.py b/src/app.py
+index 1234567..abcdef0 100644
+--- a/src/app.py
++++ b/src/app.py
+@@ -1,7 +1,8 @@
+ """Main application module."""
+
+-import os
++import os
++import sys
+
+
+ def main():
+-    print("hello")
++    print("hello world")
+@@ -20,6 +21,7 @@ def shutdown():
+     """Shut down the application gracefully."""
+     cleanup()
+     log("shutting down")
++    log("goodbye")
+     sys.exit(0)
+
+
+diff --git a/old_config.py b/old_config.py
+deleted file mode 100644
+index 9876543..0000000
+--- a/old_config.py
++++ /dev/null
+@@ -1,5 +0,0 @@
+-"""Legacy configuration that is no longer needed."""
+-
+-DB_HOST = "localhost"
+-DB_PORT = 5432
+-DEBUG = True
+diff --git a/src/config.py b/src/settings.py
+similarity index 85%
+rename from src/config.py
+rename to src/settings.py
+index aaa1111..bbb2222 100644
+--- a/src/config.py
++++ b/src/settings.py
+@@ -1,6 +1,7 @@
+-"""Configuration module."""
++"""Settings module (renamed from config)."""
+
+-DEFAULT_PORT = 8080
++DEFAULT_PORT = 9090
++DEFAULT_HOST = "0.0.0.0"
+
+ def get_port():
+     return DEFAULT_PORT
