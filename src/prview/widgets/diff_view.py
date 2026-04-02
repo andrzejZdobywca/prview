@@ -31,6 +31,8 @@ class DiffView(VerticalScroll):
 
     def show_file(self, diff_file: DiffFile) -> None:
         """Render the given file's diff."""
+        if self._current_file is not None and self._current_file.path == diff_file.path:
+            return
         self._current_file = diff_file
         self.remove_children()
         content = self._build_content(diff_file)
