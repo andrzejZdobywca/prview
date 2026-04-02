@@ -33,3 +33,4 @@ Anything else worth recording (trade-offs, follow-ups, open questions).
 - Keep entries short -- a few sentences per section is fine.
 - Update status as work progresses rather than creating duplicate entries.
 - Link to PRs or issues when relevant.
+- When a PR is merged, add a one-line entry to `CHANGELOG.md` in the project root.

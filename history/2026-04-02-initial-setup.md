@@ -16,6 +16,9 @@ The project was bootstrapped as a Python 3.11+ package using Textual for the TUI
 5. **Agent roles defined** -- Developer, Reviewer, QA, and Chronicler roles with clear responsibilities.
 
 ## Commits
+- `c5f418e` Initial commit: prview project
+- `16215b3` Clean up leftover files from diffnav and rename SPEC.md to DESIGN.md
+- `7ad536b` Add CLAUDE.md with dev setup and workflow guidelines (#1)
 - `82c10a1` Disable CodeRabbit reviews (#2)
 - `ab8aa60` Add README with usage, key bindings, and dev setup (#3)
 - `523a388` Update CLAUDE.md: use team teammates for parallel work (#4)
@@ -24,4 +27,4 @@ The project was bootstrapped as a Python 3.11+ package using Textual for the TUI
 
 ## Notes
 - The Chronicler role (this log) was introduced as part of the agent roles definition.
-- NOTES.md serves as a scratchpad for quick thoughts; this history folder is the structured record.
+- NOTES.md serves as a scratchpad for quick thoughts; CHANGELOG.md is the one-line-per-change log updated on PR merges.
