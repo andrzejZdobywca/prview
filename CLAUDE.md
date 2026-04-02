@@ -11,4 +11,9 @@ Interactive terminal diff browser built with Python 3.11+, Textual, and unidiff.
 ## Git workflow
 
 - Never commit directly to `main`. Always create a feature branch and open a PR.
-- When spawning subagents for tasks, always use `isolation: "worktree"` so the agent works on its own branch in a separate worktree. This keeps the main working tree free for parallel work.
+
+## Agent workflow
+
+- When delegating tasks, spawn a **team teammate** so the lead (main session) can continue working in parallel.
+- Teammates should use `isolation: "worktree"` so they work on their own branch in a separate worktree.
+- Permission requests from teammates will bubble up to the lead for approval.
