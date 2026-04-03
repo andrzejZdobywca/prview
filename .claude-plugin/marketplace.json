@@ -1,0 +1,15 @@
+{
+  "name": "prview",
+  "owner": {
+    "name": "Wiktor Daniec",
+    "url": "https://github.com/andrzejZdobywca"
+  },
+  "plugins": [
+    {
+      "name": "prview",
+      "source": "./",
+      "description": "Interactive terminal diff browser for PR review in iTerm2 side panes",
+      "version": "1.0.0"
+    }
+  ]
+}
