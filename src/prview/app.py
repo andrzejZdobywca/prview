@@ -5,6 +5,7 @@ from __future__ import annotations
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal
+from textual.events import Key
 from textual.widgets import Header, Footer
 
 from prview.models import DiffData, DiffFile
@@ -55,7 +56,18 @@ class DiffnavApp(App):
             self._current_file = first
             diff_view = self.query_one("#diff-view", DiffView)
             diff_view.show_file(first)
-        file_list.focus()
+        diff_view.focus()
+
+    def on_key(self, event: Key) -> None:
+        """Intercept arrow keys globally to navigate the file list."""
+        if event.key == "down":
+            self._navigate_file(1)
+            event.prevent_default()
+            event.stop()
+        elif event.key == "up":
+            self._navigate_file(-1)
+            event.prevent_default()
+            event.stop()
 
     def on_file_list_file_selected(self, message: FileList.FileSelected) -> None:
         self._current_file = message.diff_file

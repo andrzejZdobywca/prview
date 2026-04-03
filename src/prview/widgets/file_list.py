@@ -58,10 +58,7 @@ class FileList(ListView):
 
     can_focus = True
 
-    BINDINGS = [
-        Binding("j", "cursor_down", "Down", show=False),
-        Binding("k", "cursor_up", "Up", show=False),
-    ]
+    BINDINGS: list[Binding] = []
 
     class FileSelected(Message):
         """Posted when a file is selected."""

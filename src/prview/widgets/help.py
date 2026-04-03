@@ -11,13 +11,18 @@ from textual.widgets import Static
 HELP_TEXT = """\
 [bold underline]prview — Keybindings[/bold underline]
 
- [bold cyan]Navigation[/bold cyan]
-   j / ↓          Move down in file list
-   k / ↑          Move up in file list
-   Enter           Select file / expand
-   n               Next file (from diff view)
-   p               Previous file (from diff view)
+ [bold cyan]File Navigation[/bold cyan]
+   ↑ / ↓           Move up / down in file list (global)
+   n               Next file
+   p               Previous file
    Tab             Toggle focus between file list and diff view
+
+ [bold cyan]Diff Scrolling[/bold cyan]
+   j / k           Scroll diff down / up one line
+   d / u           Scroll diff down / up one page
+   Ctrl+D / Ctrl+U Scroll diff down / up half page
+   g g             Scroll to top of diff
+   G               Scroll to bottom of diff
 
  [bold cyan]Review[/bold cyan]
    m               Mark / unmark current file as reviewed
