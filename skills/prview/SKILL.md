@@ -8,32 +8,10 @@ allowed-tools: [Bash]
 
 # Open prview in a side pane
 
-First, check that `prview` is installed:
+Run the open-pane script. It checks that `prview` is installed, reuses an existing pane if possible, or creates a new one. The base directory for this skill is provided above — use it to locate `open-pane.sh`:
 
 ```bash
-command -v prview >/dev/null 2>&1 && echo "OK" || echo "MISSING"
+command -v prview >/dev/null 2>&1 && bash <SKILL_BASE_DIR>/open-pane.sh "$(pwd)" $ARGUMENTS || echo "MISSING: install with 'uv tool install prview'"
 ```
 
-If `MISSING`, tell the user to install it with `uv tool install prview` and stop.
-
-Next, check if there's already a prview pane open:
-
-```bash
-PANE_ID=$(cat /tmp/prview-pane-id 2>/dev/null) && it2 session list --json | python3 -c "import json,sys; ids=[s['id'] for s in json.load(sys.stdin)]; exit(0 if '$PANE_ID' in ids else 1)" && echo "EXISTING:$PANE_ID" || echo "NONE"
-```
-
-- If the output is `EXISTING:<ID>`, the pane is still alive. Run prview in it:
-```bash
-it2 session run -s "<PANE_ID>" "cd $(pwd) && prview $ARGUMENTS"
-```
-
-- If the output is `NONE`, create a new split pane:
-```bash
-it2 session split -v 2>&1
-```
-Save the new pane ID and run prview:
-```bash
-echo "<PANE_ID>" > /tmp/prview-pane-id && it2 session run -s "<PANE_ID>" "cd $(pwd) && prview $ARGUMENTS"
-```
-
-Report the result to the user. If any command fails, relay the error.
+The script outputs `REUSED:<pane-id>` or `CREATED:<pane-id>`. If the output is `MISSING`, tell the user to install prview and stop. Otherwise report the result. If the command fails, relay the error.
