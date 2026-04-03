@@ -93,7 +93,7 @@ def test_file_selected_message(sample_diff_data: DiffData, tmp_path) -> None:
 
 
 def test_highlight_updates_preview_without_enter(sample_diff_data: DiffData, tmp_path) -> None:
-    """Moving the cursor with j/k should post FileSelected without pressing Enter."""
+    """Moving the cursor with arrow keys should post FileSelected without pressing Enter."""
     state = ReviewState(state_dir=tmp_path / ".prview")
 
     async def run() -> None:
@@ -103,13 +103,13 @@ def test_highlight_updates_preview_without_enter(sample_diff_data: DiffData, tmp
             file_list.focus()
             await pilot.pause()
             # Move to first item to establish baseline
-            await pilot.press("j")
+            await pilot.press("down")
             await pilot.pause()
             assert app.selected_file is not None
             first_file = app.selected_file
-            # Reset and press j again — should advance to second file
+            # Reset and press down again — should advance to second file
             app.selected_file = None
-            await pilot.press("j")
+            await pilot.press("down")
             await pilot.pause()
             # FileSelected should have been posted via the highlight handler
             assert app.selected_file is not None
