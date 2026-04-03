@@ -1,6 +1,6 @@
 {
   "name": "prview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interactive terminal diff browser for PR review in iTerm2 side panes",
   "author": {
     "name": "Wiktor Daniec"
@@ -8,5 +8,11 @@
   "homepage": "https://github.com/andrzejZdobywca/prview",
   "repository": "https://github.com/andrzejZdobywca/prview",
   "license": "MIT",
-  "keywords": ["diff", "git", "pr-review", "iterm2", "prview"]
+  "keywords": [
+    "diff",
+    "git",
+    "pr-review",
+    "iterm2",
+    "prview"
+  ]
 }
