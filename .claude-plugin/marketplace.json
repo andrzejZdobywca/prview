@@ -9,7 +9,7 @@
       "name": "prview",
       "source": "./",
       "description": "Interactive terminal diff browser for PR review in iTerm2 side panes",
-      "version": "1.0.0"
+      "version": "1.0.1"
     }
   ]
 }
