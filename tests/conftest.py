@@ -112,3 +112,98 @@ def sample_diff_data() -> DiffData:
         base_ref=None,
         head_ref=None,
     )
+
+
+@pytest.fixture
+def scrollable_diff_data() -> DiffData:
+    """DiffData with enough lines per file to make scrolling testable.
+
+    Contains 4 files, each with multiple hunks and 30+ lines so that
+    scroll operations (j/k, Ctrl+D/U, G) produce measurable offset changes.
+    """
+
+    def _make_lines(count: int, start: int = 1) -> list[DiffLine]:
+        lines: list[DiffLine] = []
+        for i in range(count):
+            lineno = start + i
+            lines.append(
+                DiffLine(
+                    type="context",
+                    content=f"line {lineno} of code here with some padding text",
+                    old_lineno=lineno,
+                    new_lineno=lineno,
+                )
+            )
+        return lines
+
+    def _make_mixed_hunk(header: str, ctx: int, adds: int, removes: int, start: int = 1) -> DiffHunk:
+        lines: list[DiffLine] = []
+        lineno = start
+        for i in range(ctx):
+            lines.append(DiffLine(type="context", content=f"context line {lineno}", old_lineno=lineno, new_lineno=lineno))
+            lineno += 1
+        for i in range(removes):
+            lines.append(DiffLine(type="remove", content=f"removed line {lineno}", old_lineno=lineno, new_lineno=None))
+            lineno += 1
+        new_lineno = lineno
+        for i in range(adds):
+            lines.append(DiffLine(type="add", content=f"added line {new_lineno}", old_lineno=None, new_lineno=new_lineno))
+            new_lineno += 1
+        return DiffHunk(header=header, lines=lines)
+
+    return DiffData(
+        files=[
+            DiffFile(
+                path="src/alpha.py",
+                old_path=None,
+                status="modified",
+                hunks=[
+                    DiffHunk(header="@@ -1,20 +1,20 @@", lines=_make_lines(20, start=1)),
+                    _make_mixed_hunk("@@ -25,15 +25,18 @@", ctx=5, adds=8, removes=3, start=25),
+                ],
+                added_lines=8,
+                removed_lines=3,
+            ),
+            DiffFile(
+                path="src/beta.py",
+                old_path=None,
+                status="added",
+                hunks=[
+                    DiffHunk(
+                        header="@@ -0,0 +1,40 @@",
+                        lines=[
+                            DiffLine(type="add", content=f"new line {i}", old_lineno=None, new_lineno=i)
+                            for i in range(1, 41)
+                        ],
+                    ),
+                ],
+                added_lines=40,
+                removed_lines=0,
+            ),
+            DiffFile(
+                path="src/gamma.py",
+                old_path=None,
+                status="modified",
+                hunks=[
+                    _make_mixed_hunk("@@ -1,10 +1,12 @@", ctx=4, adds=6, removes=2, start=1),
+                    _make_mixed_hunk("@@ -50,10 +52,14 @@", ctx=3, adds=8, removes=2, start=50),
+                    DiffHunk(header="@@ -80,5 +84,5 @@", lines=_make_lines(10, start=80)),
+                ],
+                added_lines=14,
+                removed_lines=4,
+            ),
+            DiffFile(
+                path="src/delta.py",
+                old_path="src/old_delta.py",
+                status="renamed",
+                hunks=[
+                    DiffHunk(header="@@ -1,30 +1,35 @@", lines=_make_lines(30, start=1)),
+                    _make_mixed_hunk("@@ -35,5 +40,10 @@", ctx=3, adds=5, removes=2, start=35),
+                ],
+                added_lines=5,
+                removed_lines=2,
+            ),
+        ],
+        base_ref="abc123",
+        head_ref="def456",
+    )
