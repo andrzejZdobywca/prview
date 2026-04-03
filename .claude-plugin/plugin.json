@@ -1,0 +1,8 @@
+{
+  "name": "prview",
+  "version": "0.1.0",
+  "description": "Open the prview TUI diff browser in an iTerm2 side pane from Claude Code",
+  "author": {
+    "name": "Wiktor Danie"
+  }
+}
