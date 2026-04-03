@@ -19,6 +19,25 @@ prview main..feature          # branch comparison
 git diff | prview             # piped input
 ```
 
+## Claude Code Plugin
+
+prview is available as a [Claude Code](https://claude.ai/claude-code) plugin that opens the diff browser in an iTerm2 side pane.
+
+**Install:**
+
+```
+/plugin marketplace add andrzejZdobywca/prview
+/plugin install prview@prview
+```
+
+**Use:**
+
+```
+/prview
+/prview --staged
+/prview main..feature
+```
+
 ## Key Bindings
 
 | Key | Action |
